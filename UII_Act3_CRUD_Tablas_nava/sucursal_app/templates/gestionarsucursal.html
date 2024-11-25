@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna Izquierda-->
+    <h1>Sucursal</h1>
+
+    <div class="card"> <!--Tarjeta-->
+        <div class="card-body">
+            <form action="/registrarSucursal/" method="POST"> {% csrf_token %} <!--Formulario-->
+                <div class="form-group">
+                    <input type="text" id="txtidSucursal" name="txtidSucursal" class="form-control" 
+                    placeholder="id Sucrsal" minLenght="6" maxLenght="6" reqired>
+                </div>
+                <div class="form-group py-3">
+                    <input type="text" id="txtnombre_sucursal" name="txtnombre_sucursal" class="form-control" 
+                    placeholder="Nombre Sucursal" maxLenght="100" reqired>
+                </div>
+                <div class="form-group py-2">
+                    <input type="text" id="txt" name="numcreditos" class="form-control" 
+                    value="1" min="1" max="9" reqired>
+                </div>
+                <div class="form-group py-2">
+                    <button type="submit" class="btn btn-secondary">Guardar</button>
+                </div>
+            </form> <!--Formulario-->
+        </div>
+    </div> <!--Tarjeta-->
+
+</div><!--Columna Izquierda-->
+
+<!--Sucursal-->
+
+<div class="container-fluid"> <!-- Usa container-fluid para máximo ancho -->
+    <div class="row">
+        <div class="col-12"> <!-- Asegúrate de que la columna ocupe todo el ancho -->
+            <h1>Listado de Sucursal</h1>
+            <img class="w-50" src="{% static "img/sucu.jpg" %}" alt="IMAGEN" width="400" height="500">
+            <br>
+            <div class="table-responsive"> <!-- Mantén la tabla responsive -->
+                <table class="table table-striped w-100"> <!-- Añade w-100 para 100% de ancho -->
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">id</th>
+                            <th scope="col">Nombre Sucursal</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Hora de Apertura</th>
+                            <th scope="col">Hora de Cierre</th>
+                            <th scope="col">Nombre Encargado</th>
+                            <th scope="col">Código Postal</th>
+                            <th scope="col">Número de Teléfono</th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in missucursales %}
+                        <tr>
+                            <td> {{ forloop.counter }}</td>
+                            <td> {{ m.idSucursal }}</td>
+                            <td> {{ m.nombre_sucursal }}</td>
+                            <td> {{ m.direccion }}</td>
+                            <td> {{ m.horaApertura }}</td>
+                            <td> {{ m.horaCierre }}</td>
+                            <td> {{ m.nombre_encargado }}</td>
+                            <td> {{ m.cp }}</td>
+                            <td> {{ m.numero_telefono }}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Provedor-->
+
+<div class="container-fluid"> <!-- Usa container-fluid para máximo ancho -->
+    <div class="row">
+        <div class="col-12"> <!-- Asegúrate de que la columna ocupe todo el ancho -->
+            <h1>Listado de Provedor</h1>
+            <div class="table-responsive"> <!-- Mantén la tabla responsive -->
+                <table class="table table-striped w-100"> <!-- Añade w-100 para 100% de ancho -->
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">id</th>
+                            <th scope="col">Nombre Empresa</th>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Calificación</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Número de Télefono</th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in misprovedores %}
+                        <tr>
+                            <td> {{ forloop.counter }}</td>
+                            <td> {{ a.idProvedor }}</td>
+                            <td> {{ a.nombre_empresa }}</td>
+                            <td> {{ a.contacto }}</td>
+                            <td> {{ a.calificacion }}</td>
+                            <td> {{ a.correo }}</td>
+                            <td> {{ a.ciudad }}</td>
+                            <td> {{ a.numero_telefono_provedor }}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
